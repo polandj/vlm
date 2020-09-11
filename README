@@ -1,0 +1,17 @@
+Edit the .chalice/config file to include the following environment variables:
+
+
+
+To deploy:
+
+export AWS_PROFILE=KeenGlowChalice
+pipenv shell
+cd api
+chalice deploy
+
+To Develop:
+export AWS_PROFILE=KeenGlowChalice
+pipenv shell
+
+aws lambda add-permission --profile maplegate --function-name vlm-dev-smartapp --statement-id smartthings --principal 906037444270 --action lambda:InvokeFunction
+
