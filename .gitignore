@@ -1,2 +1,3 @@
 .chalice
+*.swp
 __pycache__
