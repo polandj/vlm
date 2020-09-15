@@ -1,5 +1,10 @@
+This is still a work in progress, since lockCodes capability is still not supported (https://community.smartthings.com/t/correct-z-wave-lock-api-command/171573/6)
+
 Edit the .chalice/config file to include the following environment variables:
 
+TW_ACCT, TW_SID, TW_TOK, TW_PHONE, ST_CLIENT_ID, ST_CLIENT_SECRET
+
+Note that the ST ones are a bit of chicken and egg since your API needs to be up in order to register the app to get them.  They're mainly used to update refresh tokens, which expire after 30 days.  So deploy the API without them, deploy the app to test in SmartThings, then redeploy from chalice with them set.
 
 
 To deploy:
