@@ -108,31 +108,42 @@ def addReservation(appId):
 
 @app.route('/db/init')
 def initDb():
-    table = dynamodb.create_table(
-            TableName='vlm_reservations',
-            KeySchema=[{
-                    'AttributeName': 'appId',
-                    'KeyType': 'HASH'
-                }, {
-                    'AttributeName': 'phone',
-                    'KeyType': 'RANGE'
-                }],
-            AttributeDefinitions=[{
-                    'AttributeName': 'appId',
-                    'AttributeType': 'S'
-                }, {
-                    'AttributeName': 'phone',
-                    'AttributeType': 'S'
-                }],
-            ProvisionedThroughput={
-                'ReadCapacityUnits': 5,
-                'WriteCapacityUnits': 5
-                }
-            )
-
-    # Wait until the table exists.
-    table.meta.client.get_waiter('table_exists').wait(TableName='vlm_reservations')
-
+    dynamodb.create_table(
+        TableName='vlm_settings',
+        KeySchema=[{
+            'AttributeName': 'appId',
+            'KeyType': 'HASH'
+        }],
+        AttributeDefinitions=[{
+            'AttributeName': 'appId',
+            'AttributeType': 'S'
+        }]
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
+    dynamodb.create_table(
+        TableName='vlm_reservations',
+        KeySchema=[{
+            'AttributeName': 'appId',
+            'KeyType': 'HASH'
+        }, {
+            'AttributeName': 'phone',
+            'KeyType': 'RANGE'
+        }],
+        AttributeDefinitions=[{
+            'AttributeName': 'appId',
+            'AttributeType': 'S'
+        }, {
+            'AttributeName': 'phone',
+            'AttributeType': 'S'
+        }],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
 
 @app.route('/{appId}/cancel', methods=['POST'])
 def delReservation(appId):
